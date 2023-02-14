@@ -46,7 +46,7 @@ def clean_data(df):
     df = df.drop_duplicates()
     for column in categories.columns:
     unique_values = df[column].unique()
-    
+
     # I found for some reason that there was a two in four rows in the related column
     # So now all rows are dropped where there are entries unequal two one or two
     # The only risk is if the input dataset has for some reasons a lot of twos
@@ -63,7 +63,7 @@ def save_data(df, database_filename):
 
     Args:
         df (pandas.DataFrame): The DataFrame to be saved.
-        database_filename (str): The filename (including path) of the database to save to.
+        database_filename (str): The filename of the database to save to.
 
     Returns:
         None

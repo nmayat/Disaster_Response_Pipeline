@@ -3,12 +3,33 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Load and merge messages and categories datasets from CSV files.
+
+    Args:
+        messages_filepath (str): Filepath to the messages CSV file.
+        categories_filepath (str): Filepath to the categories CSV file.
+
+    Returns:
+        pandas.DataFrame: A merged DataFrame containing the messages and categories data.
+    """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = messages.merge(categories, how='left', on='id')
     return df
 
 def clean_data(df):
+    """
+    Clean the input DataFrame by splitting the 'categories' column into separate
+    columns for each category, converting the values to integers, dropping duplicates,
+    and removing rows with category values other than 0 or 1.
+
+    Args:
+        df (pandas.DataFrame): The DataFrame to be cleaned.
+
+    Returns:
+        pandas.DataFrame: The cleaned DataFrame.
+    """
     categories = df.categories.str.split(';', expand = True)
 
     row = categories.iloc[0]
@@ -25,13 +46,28 @@ def clean_data(df):
     df = df.drop_duplicates()
     for column in categories.columns:
     unique_values = df[column].unique()
+    
+    # I found for some reason that there was a two in four rows in the related column
+    # So now all rows are dropped where there are entries unequal two one or two
+    # The only risk is if the input dataset has for some reasons a lot of twos
+    # a lot of rows are dropped
     if len(unique_values) > 2:
         df.drop(index = df[(df[column] != 1) & (df[column] != 0)].index, inplace = True)
-        
+
     return df
 
 
 def save_data(df, database_filename):
+    """
+    Save the input DataFrame to a SQLite database.
+
+    Args:
+        df (pandas.DataFrame): The DataFrame to be saved.
+        database_filename (str): The filename (including path) of the database to save to.
+
+    Returns:
+        None
+    """
      engine = create_engine('sqlite:///' + database_filename)
      df.to_sql('Clean_Data', engine, index=False)
 

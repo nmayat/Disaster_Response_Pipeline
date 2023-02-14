@@ -23,7 +23,11 @@ def clean_data(df):
 
     df = pd.concat([df,categories], axis = 1)
     df = df.drop_duplicates()
-
+    for column in categories.columns:
+    unique_values = df[column].unique()
+    if len(unique_values) > 2:
+        df.drop(index = df[(df[column] != 1) & (df[column] != 0)].index, inplace = True)
+        
     return df
 
 

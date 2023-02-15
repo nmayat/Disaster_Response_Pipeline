@@ -1,4 +1,4 @@
-mport sys
+import sys
 import pandas as pd
 from sqlalchemy import create_engine
 
@@ -45,7 +45,7 @@ def clean_data(df):
     df = pd.concat([df,categories], axis = 1)
     df = df.drop_duplicates()
     for column in categories.columns:
-    unique_values = df[column].unique()
+        unique_values = df[column].unique()
 
     # I found for some reason that there was a two in four rows in the related column
     # So now all rows are dropped where there are entries unequal two one or two
@@ -68,8 +68,8 @@ def save_data(df, database_filename):
     Returns:
         None
     """
-     engine = create_engine('sqlite:///' + database_filename)
-     df.to_sql('Clean_Data', engine, index=False)
+    engine = create_engine('sqlite:///' + database_filename)
+    df.to_sql('Clean_Data', engine, index=False)
 
 
 def main():

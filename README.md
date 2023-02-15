@@ -4,12 +4,6 @@ This project is a part of the Udacity Data Science Nanodegree. It aims to build 
 ## Project Summary
 The Disaster Response Pipeline project is designed to help organizations quickly and effectively respond to natural disasters. By classifying incoming messages, emergency responders can better identify and prioritize urgent needs, saving valuable time and resources.
 
-## Installation
-Clone the repository and navigate to the project directory.
-
-git clone https://github.com/your_username/disaster-response-pipeline.git
-cd disaster-response-pipeline
-
 ## Data
 The project uses data from Appen (formerly Figure Eight). The messages.csv file contains the messages provided by Appen, and the corresponding labels are in the categories.csv file.
 

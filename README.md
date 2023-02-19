@@ -21,11 +21,15 @@ To train the model, we load the data from the SQLite database, split it into tra
 To run the ML pipeline:
 python train_classifier.py DisasterResponse.db classifier.pkl
 
+The grid search in the pipeline might take some time to run. There is already a trained model in the models folder, so that the run.py app should work as well.
+
 ## Flask Web Appen
 The Flask web app provides a user interface for entering new messages and viewing classification results. The app loads the saved model and uses it to classify new messages.
 
 To run the Flask web app:
 python run.py
+
+The web app can than be accessed via http://http://192.168.178.30:3000
 
 ## Imbalanced Data
 Imbalanced datasets can present challenges when training machine learning models, as some labels may have very few examples compared to others. In the context of this particular dataset, it means that some categories, such as "water," may have significantly fewer examples than others. This can result in the model being biased towards the majority classes, leading to poorer performance on the minority classes. The imbalance in this dataset can affect the training of the model in several ways. For example, if we use traditional metrics like accuracy, the model may perform well overall by correctly predicting the majority class but may struggle to accurately classify the minority classes. As a result, the overall accuracy may be misleading, as the model's performance on the minority classes may be much worse than on the majority classes.

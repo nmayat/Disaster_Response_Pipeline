@@ -23,7 +23,7 @@ python train_classifier.py DisasterResponse.db classifier.pkl
 
 The grid search in the pipeline might take some time to run. There is already a trained model in the models folder, so that the run.py app should work as well.
 
-## Flask Web Appen
+## Flask Web Ap
 The Flask web app provides a user interface for entering new messages and viewing classification results. The app loads the saved model and uses it to classify new messages.
 
 To run the Flask web app:
